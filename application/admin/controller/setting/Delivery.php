@@ -83,7 +83,8 @@ class Delivery extends Controller
             return $this->fetch('edit', compact('regionData','model'));
         }
         // 更新记录
-        if ($model->edit($this->postData('delivery'))) {
+        $res = $model->edit($this->postData('delivery'));
+        if ($res !== false) {
             return $this->renderSuccess('更新成功', url('setting.delivery/index'));
         }
         $error = $model->getError() ?: '更新失败';

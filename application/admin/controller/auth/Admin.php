@@ -74,7 +74,8 @@ class Admin extends Controller
             return $this->fetch('edit', compact('model','role'));
         }
         // 更新记录
-        if ($model->edit($this->postData('admin'))) {
+        $res = $model->edit($this->postData('admin'));
+        if ($res !== false) {
             return $this->renderSuccess('更新成功', url('auth.admin/index'));
         }
         $error = $model->getError() ?: '更新失败';

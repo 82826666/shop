@@ -40,7 +40,7 @@ class Goods extends Controller
         }
         $model = new GoodsModel;
         if ($model->add($this->postData('goods'))) {
-            return $this->renderSuccess('添加成功', url('goods/index'));
+            return $this->renderSuccess('添加成功', url('goods.goods/index'));
         }
         $error = $model->getError() ?: '添加失败';
         return $this->renderError($error);
@@ -83,8 +83,9 @@ class Goods extends Controller
             return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
         // 更新记录
-        if ($model->edit($this->postData('goods'))) {
-            return $this->renderSuccess('更新成功', url('goods/index'));
+        $res = $model->edit($this->postData('goods'));
+        if ($res !== false) {
+            return $this->renderSuccess('更新成功', url('goods.goods/index'));
         }
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
