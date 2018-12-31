@@ -84,7 +84,8 @@ class Goods extends Controller
             return $this->fetch('edit', compact('model', 'catgory', 'delivery', 'specData'));
         }
         // 更新记录
-        if ($model->edit($this->postData('goods'))) {
+        $res = $model->edit($this->postData('goods'));
+        if ($res !== false) {
             return $this->renderSuccess('更新成功', url('goods.goods/index'));
         }
         $error = $model->getError() ?: '更新失败';

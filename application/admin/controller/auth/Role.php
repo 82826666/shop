@@ -73,7 +73,8 @@ class Role extends Controller
             return $this->fetch('edit', compact('model','limit'));
         }
         // 更新记录
-        if ($model->edit($this->postData('Role'))) {
+        $res = $model->edit($this->postData('Role'));
+        if ($res !== false) {
             return $this->renderSuccess('更新成功', url('auth.role/index'));
         }
         $error = $model->getError() ?: '更新失败';

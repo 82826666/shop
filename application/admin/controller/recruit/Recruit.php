@@ -50,7 +50,7 @@ class Recruit extends Controller
         }
         // 新增记录
         if ($model->add($this->postData('recruit'))) {
-            return $this->renderSuccess('添加成功', url('recruit/index'));
+            return $this->renderSuccess('添加成功', url('recruit.recruit/index'));
         }
         $error = $model->getError() ?: '添加失败';
         return $this->renderError($error);
@@ -70,8 +70,9 @@ class Recruit extends Controller
             return $this->fetch('edit', compact('model'));
         }
         // 更新记录
-        if ($model->edit($this->postData('recruit'))) {
-            return $this->renderSuccess('更新成功', url('recruit/index'));
+        $res = $model->edit($this->postData('recruit'));
+        if ($res !== false) {
+            return $this->renderSuccess('更新成功', url('recruit.recruit/index'));
         }
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
