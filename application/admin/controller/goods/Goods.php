@@ -21,7 +21,8 @@ class Goods extends Controller
     public function index()
     {
         $model = new GoodsModel;
-        $list = $model->getList();
+        $status = isset($_GET['goods_status']) ? $_GET['goods_status'] : null;
+        $list = $model->getList($status);
         return $this->fetch('index', compact('list'));
     }
 
