@@ -36,6 +36,9 @@ class Delivery extends DeliveryModel
                 break;
             }
         }
+        if(!$rule){
+            return number_format(0,2);
+        }
         // 商品总数量or总重量
         $total = $this['method']['value'] == 10 ? $total_num : $total_weight;
         if ($total <= $rule['first']) {
