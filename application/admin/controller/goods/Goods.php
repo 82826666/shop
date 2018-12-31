@@ -21,7 +21,8 @@ class Goods extends Controller
     public function index()
     {
         $model = new GoodsModel;
-        $list = $model->getList();
+        $status = isset($_GET['goods_status']) ? $_GET['goods_status'] : null;
+        $list = $model->getList($status);
         return $this->fetch('index', compact('list'));
     }
 
@@ -40,7 +41,7 @@ class Goods extends Controller
         }
         $model = new GoodsModel;
         if ($model->add($this->postData('goods'))) {
-            return $this->renderSuccess('添加成功', url('goods/index'));
+            return $this->renderSuccess('添加成功', url('goods.goods/index'));
         }
         $error = $model->getError() ?: '添加失败';
         return $this->renderError($error);
@@ -84,7 +85,7 @@ class Goods extends Controller
         }
         // 更新记录
         if ($model->edit($this->postData('goods'))) {
-            return $this->renderSuccess('更新成功', url('goods/index'));
+            return $this->renderSuccess('更新成功', url('goods.goods/index'));
         }
         $error = $model->getError() ?: '更新失败';
         return $this->renderError($error);
