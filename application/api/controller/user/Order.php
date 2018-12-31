@@ -5,6 +5,7 @@ namespace app\api\controller\user;
 use app\api\controller\Controller;
 use app\api\model\Order as OrderModel;
 use app\common\library\wechat\WxPay;
+use app\api\model\Setting as SettingModel;
 
 /**
  * 用户订单管理
