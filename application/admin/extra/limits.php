@@ -20,6 +20,9 @@ $_limit =  array(
     array('name'=>'招聘管理', 'child'=>array(
         array('name'=>'招聘列表', 'op'=>null, 'act'=>'recruit.recruit'),
     )),
+    array('name'=>'优惠券管理', 'child'=>array(
+        array('name'=>'优惠券列表', 'op'=>null, 'act'=>'coupon.coupon'),
+    )),
     array('name'=>'订单管理', 'child'=>array(
         array('name'=>'订单管理', 'op'=>null, 'act'=>'order.order')
     )),

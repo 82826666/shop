@@ -54,6 +54,22 @@ return [
             ],
         ],
     ],
+    'coupon' => [
+        'name' => '优惠券管理',
+        'icon' => 'icon-goods',
+        'index' => 'coupon.coupon/index',
+        'submenu' => [
+            [
+                'name' => '优惠券列表',
+                'index' => 'coupon.coupon/index',
+                'uris' => [
+                    'coupon.coupon/index',
+                    'coupon.coupon/add',
+                    'coupon.coupon/edit'
+                ],
+            ],
+        ],
+    ],
     'order' => [
         'name' => '订单管理',
         'icon' => 'icon-order',
