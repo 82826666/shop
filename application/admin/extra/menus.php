@@ -3,19 +3,16 @@
  * 后台菜单配置
  *    'home' => [
  *       'name' => '首页',                // 菜单名称
- *       'icon' => 'icon-home',          // 图标 (class)
  *       'index' => 'index/index',         // 链接
  *     ],
  */
 return [
     'index' => [
         'name' => '首页',
-        'icon' => 'icon-home',
         'index' => 'index/index',
     ],
     'goods' => [
         'name' => '商品管理',
-        'icon' => 'icon-goods',
         'index' => 'goods.goods/index',
         'submenu' => [
             [
@@ -40,7 +37,6 @@ return [
     ],
     'recruit' => [
         'name' => '招聘管理',
-        'icon' => 'icon-goods',
         'index' => 'recruit.recruit/index',
         'submenu' => [
             [
@@ -56,7 +52,6 @@ return [
     ],
     'coupon' => [
         'name' => '优惠券管理',
-        'icon' => 'icon-goods',
         'index' => 'coupon.coupon/index',
         'submenu' => [
             [
@@ -72,7 +67,6 @@ return [
     ],
     'order' => [
         'name' => '订单管理',
-        'icon' => 'icon-order',
         'index' => 'order.order/delivery_list',
         'submenu' => [
             [
@@ -104,7 +98,6 @@ return [
     ],
     'user' => [
         'name' => '用户管理',
-        'icon' => 'icon-user',
         'index' => 'user.user/index',
         'submenu' => [
             [
@@ -120,13 +113,11 @@ return [
     ],
 //    'marketing' => [
 //        'name' => '营销管理',
-//        'icon' => 'icon-marketing',
 //        'index' => 'marketing/index',
 //        'submenu' => [],
 //    ],
     'setting' => [
         'name' => '设置',
-        'icon' => 'icon-setting',
         'index' => 'setting.setting/store',
         'submenu' => [
             [
@@ -189,7 +180,6 @@ return [
     ],
     'auth' => [
         'name' => '权限管理',
-        'icon' => 'icon-setting',
         'index' => 'auth.admin/index',
         'submenu' => [
             [
