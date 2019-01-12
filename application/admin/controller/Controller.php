@@ -70,7 +70,7 @@ class Controller extends \think\Controller
             $this->auth = unserialize($role['act']);
         }
         if(!in_array($this->routeUri, $this->allowAllAction) && !in_array($this->controller,$this->auth)){
-            $this->redirect('passport/login');
+            $this->error('您没有这个权限');
             return false;
         }
     }
