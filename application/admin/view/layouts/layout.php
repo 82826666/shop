@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="assets/store/i/favicon.ico"/>
+    <link rel="icon" type="image/png" href="assets/admin/i/favicon.ico"/>
     <meta name="apple-mobile-web-app-title" content="<?= $setting['store']['values']['name'] ?>"/>
-    <link rel="stylesheet" href="assets/store/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="assets/store/css/app.css"/>
+    <link rel="stylesheet" href="assets/admin/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/admin/css/app.css"/>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_783249_t6knt0guzo.css">
-    <script src="assets/store/js/jquery.min.js"></script>
+    <script src="assets/admin/js/jquery.min.js"></script>
     <script src="//at.alicdn.com/t/font_783249_e5yrsf08rap.js"></script>
     <script>
         BASE_URL = '<?= isset($base_url) ? $base_url : '' ?>';
@@ -64,14 +64,6 @@
                 <li class="sidebar-nav-link">
                     <a href="<?= isset($item['index']) ? url($item['index']) : 'javascript:void(0);' ?>"
                        class="<?= $item['active'] ? 'active' : '' ?>">
-                        <?php if (isset($item['is_svg']) && $item['is_svg'] === true): ?>
-                            <svg class="icon sidebar-nav-link-logo" aria-hidden="true">
-                                <use xlink:href="#<?= $item['icon'] ?>"></use>
-                            </svg>
-                        <?php else: ?>
-                            <i class="iconfont sidebar-nav-link-logo <?= $item['icon'] ?>"
-                               style="<?= isset($item['color']) ? "color:{$item['color']};" : '' ?>"></i>
-                        <?php endif; ?>
                         <?= $item['name'] ?>
                     </a>
                 </li>
@@ -122,13 +114,13 @@
 
 </div>
 <script src="assets/layer/layer.js"></script>
-<script src="assets/store/js/jquery.form.min.js"></script>
-<script src="assets/store/js/amazeui.min.js"></script>
-<script src="assets/store/js/icheck.min.js"></script>
-<script src="assets/store/js/webuploader.html5only.js"></script>
-<script src="assets/store/js/art-template.js"></script>
-<script src="assets/store/js/app.js"></script>
-<script src="assets/store/js/file.library.js"></script>
+<script src="assets/admin/js/jquery.form.min.js"></script>
+<script src="assets/admin/js/amazeui.min.js"></script>
+<script src="assets/admin/js/icheck.min.js"></script>
+<script src="assets/admin/js/webuploader.html5only.js"></script>
+<script src="assets/admin/js/art-template.js"></script>
+<script src="assets/admin/js/app.js"></script>
+<script src="assets/admin/js/file.library.js"></script>
 </body>
 
 </html>
