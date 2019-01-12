@@ -15,7 +15,7 @@ use app\admin\model\Role as roleModel;
 class Controller extends \think\Controller
 {
     /* @var array $store 商家登录信息 */
-    protected $store;
+    protected $admin;
 
     /* @var string $route 当前控制器名称 */
     protected $controller = '';
@@ -48,7 +48,7 @@ class Controller extends \think\Controller
     public function _initialize()
     {
         // 商家登录信息
-        $this->store = Session::get('admin');
+        $this->admin = Session::get('admin');
         // 当前路由信息
         $this->getRouteinfo();
         // 验证登录
@@ -60,9 +60,12 @@ class Controller extends \think\Controller
     }
 
     public function checkAuth(){
-        $admin = Session::get('admin');
+        $admin = $this->admin;
         $role_id = isset($admin['user']['role_id']) ? $admin['user']['role_id'] : 0;
         $role =  $model = roleModel::get($role_id);
+        if($admin['user']['admin_user_id'] == 1){
+            return true;
+        }
         if($role['act']){
             $this->auth = unserialize($role['act']);
         }
@@ -85,7 +88,7 @@ class Controller extends \think\Controller
                 'store_url' => url('/admin'),              // 后台模块url
                 'group' => $this->group,
                 'menus' => $this->menus(),                     // 后台菜单
-                'store' => $this->store,                       // 商家登录信息
+                'store' => $this->admin,                       // 商家登录信息
                 'setting' => Setting::getAll() ?: null,        // 当前商城设置
             ]);
         }
@@ -114,6 +117,7 @@ class Controller extends \think\Controller
     private function menus()
     {
         $auth = $this->auth;
+        $admin = $this->admin['user'];
 //        $auth = array('index','setting','auth.role','goods','recruit','order','setting.delivery','setting.cache','setting.science','user','auth.admin','goods.category');
         foreach ($data = Config::get('menus') as $group => $first) {
             $data[$group]['active'] = $group === $this->group;
@@ -126,7 +130,7 @@ class Controller extends \think\Controller
                     if (isset($second['submenu'])) {
                         // 遍历：三级菜单
                         foreach ($second['submenu'] as $thirdKey => $third) {
-                            if(!in_array(explode('/',$third['index'])[0],$auth)){
+                            if($admin['admin_user_id'] !=1 && !in_array(explode('/',$third['index'])[0],$auth)){
                                 unset($data[$group]['submenu'][$secondKey]['submenu'][$thirdKey]);
                                 continue;
                             }
@@ -140,17 +144,17 @@ class Controller extends \think\Controller
                             }
                             $data[$group]['submenu'][$secondKey]['submenu'][$thirdKey]['active'] = in_array($this->routeUri, $thirdUris);
                         }
-                        if(!$data[$group]['submenu'][$secondKey]['submenu']){
+                        if($admin['admin_user_id'] !=1 && !$data[$group]['submenu'][$secondKey]['submenu']){
                             unset($data[$group][$secondKey]);
                         }
                         foreach ($data[$group]['submenu'] as $k => $v){
-                            if(!in_array(explode('/',$v['index'])[0],$auth)){
+                            if($admin['admin_user_id'] !=1 && !in_array(explode('/',$v['index'])[0],$auth)){
                                 unset($data[$group]['submenu'][$k]);
                                 continue;
                             }
                         }
                     } else {
-                        if(!in_array(explode('/',$second['index'])[0],$auth)){
+                        if($admin['admin_user_id'] !=1 && !in_array(explode('/',$second['index'])[0],$auth)){
                             unset($data[$group]['submenu'][$secondKey]);
                             continue;
                         }
@@ -166,15 +170,20 @@ class Controller extends \think\Controller
                     }
                 }
             }else{
-                if(!in_array(explode('/',$first['index'])[0],$auth)){
+                if($admin['admin_user_id'] !=1 && !in_array(explode('/',$first['index'])[0],$auth)){
                     unset($data[$group]);
                 }
             }
         }
         foreach ($data as $k => $v){
-            if(isset($v['submenu']) && !$v['submenu']){
-                unset($data[$k]);
-                continue;
+            if(isset($v['submenu'])){
+                if(!$v['submenu']){
+                    unset($data[$k]);
+                    continue;
+                }else{
+                    $submenu = $v['submenu'];
+                    $data[$k]['index'] = $submenu[0]['index'];
+                }
             }
         }
         return $data;
@@ -190,7 +199,7 @@ class Controller extends \think\Controller
             return true;
         }
         // 验证登录状态
-        if (empty($this->store) || (int)$this->store['is_login'] !== 1) {
+        if (empty($this->admin) || (int)$this->admin['is_login'] !== 1) {
 			$this->redirect('passport/login');
             return false;
         }
